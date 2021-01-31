@@ -33,7 +33,7 @@ jobs:
       - name: Build Ubuntu ${{ matrix.flavor }} VM
         run:  |
               python mininet/util/vm/build.py -v -b master -z --nokvm ${{ matrix.flavor }}
-              (pushd mn* && sha256sum * > sha256sum.txt)
+              (pushd mn* && sha256sum *.{zip,vmdk,ovf} > sha256sum.txt)
       - name: Upload Mininet VM
         uses: actions/upload-artifact@v2
         with:
@@ -41,4 +41,3 @@ jobs:
             path: |
                   mn-*/*.zip
                   mn-*/*.txt
-              
